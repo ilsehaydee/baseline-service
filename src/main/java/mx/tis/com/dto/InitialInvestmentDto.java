@@ -10,30 +10,30 @@
  */
 package mx.tis.com.dto;
 
-import lombok.AllArgsConstructor;
+
 import lombok.ToString;
 
 
-@AllArgsConstructor
+
 
 
 @ToString
 public class InitialInvestmentDto {
 
 
-  public Double initialInvestment;
+  private Double initialInvestment;
 
 
-  public Double yearlyInput;
+  private Double yearlyInput;
 
 
-  public Integer yearlyInputIncrement;
+  private Integer yearlyInputIncrement;
 
 
-  public Float investmentYield;
+  private Float investmentYield;
 
 
-  public Integer investmentYears;
+  private Integer investmentYears;
 
 
   public Double getInitialInvestment() {

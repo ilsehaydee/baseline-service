@@ -47,19 +47,19 @@ import lombok.ToString;
 public class InvestmentYieldDto {
   
   /** The investment year. */
-  public Integer investmentYear;
+  private Integer investmentYear;
   
   /** The initial investment. */
-  public Double initialInvestment;
+  private Double initialInvestment;
   
   /** The yearly input. */
-  public Double yearlyInput;
+  private Double yearlyInput;
   
   /** The investment yield. */
-  public Double investmentYield;
+  private Double investmentYield;
   
   /** The final balance. */
-  public Double finalBalance;
+  private Double finalBalance;
 
   /**
    * Gets the investment year.

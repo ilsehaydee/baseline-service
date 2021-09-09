@@ -11,10 +11,7 @@
  */
 
 package mx.tis.com.application.service.imp;
-
 import java.util.ArrayList;
-import java.util.List;
-import java.math.*;
 import mx.tis.com.application.service.CompoundInterestCalculator;
 import mx.tis.com.dto.InitialInvestmentDto;
 import mx.tis.com.dto.InvestmentYieldDto;
@@ -23,10 +20,31 @@ import mx.tis.com.dto.InvestmentYieldDto;
 public class CompoundInterestCalculatorImpl implements CompoundInterestCalculator {
 
   @Override
-  public boolean validateInput(InitialInvestmentDto input) {
-    return (input.getInitialInvestment() > 1000.00);
+  public boolean validateInput(InitialInvestmentDto initialInvestment) {
+    
+    this.setValuesAsDefault(initialInvestment);
+    
+boolean isValid = true;
+
+isValid = isValid && (initialInvestment.getInitialInvestment() >= 1000);
+isValid = isValid && (initialInvestment.getYearlyInput() >= 0.0);
+isValid = isValid && (initialInvestment.getYearlyInputIncrement() >= 0);
+isValid = isValid && (initialInvestment.getInvestmentYears() > 0.0);
+isValid = isValid && (initialInvestment.getInvestmentYield() > 0.0);
+
+return isValid;
+
   }
 
+  public void setValuesAsDefault(InitialInvestmentDto initialInvestment) {
+    Double yearlyInput = initialInvestment.getYearlyInput();
+    yearlyInput = yearlyInput == null ? 0.0 : yearlyInput;
+    initialInvestment.setYearlyInput(yearlyInput);
+
+    Integer yearlyInputIncrement = initialInvestment.getYearlyInputIncrement();
+    yearlyInputIncrement = yearlyInputIncrement == null ? 0 : yearlyInputIncrement;
+    initialInvestment.setYearlyInputIncrement(yearlyInputIncrement);
+  }
 
 
   public ArrayList<InvestmentYieldDto> createRevenueGrid(
@@ -40,19 +58,18 @@ public class CompoundInterestCalculatorImpl implements CompoundInterestCalculato
     ArrayList<InvestmentYieldDto> investmentYieldList = new ArrayList<>();
 
 
-    double aux = 0.00;
+    double savedValue = 0.00;
 
 
     for (int index = 0; index < initialInvestmentDto.getInvestmentYears(); index++) {
       investmentYear = index + 1;
-      yearlyInput = initialInvestmentDto.getYearlyInput() + aux;
-      aux += yearlyInput * initialInvestmentDto.getYearlyInputIncrement() / 100;
-      aux = Math.ceil(aux);
-      System.out.println(aux);
+      yearlyInput = initialInvestmentDto.getYearlyInput() + savedValue;
+      savedValue += yearlyInput * initialInvestmentDto.getYearlyInputIncrement() / 100;
+      savedValue = Math.ceil(savedValue);
 
       if (index == 0) {
 
-        initialInvestment = initialInvestmentDto.getInitialInvestment();
+        initialInvestment = initialInvestmentDto.getInitialInvestment(); 
 
       } else if (index > 0) {
         initialInvestment = finalBalance;
