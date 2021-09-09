@@ -12,17 +12,12 @@ package mx.tis.com.application.controller;
 
 import java.util.List;
 import mx.tis.com.application.service.CompoundInterestCalculator;
-import mx.tis.com.application.service.imp.CompoundInterestCalculatorImpl;
 import mx.tis.com.dto.InitialInvestmentDto;
 import mx.tis.com.dto.InvestmentYieldDto;
 
-/**
- * The Class ApplicationController.
- */
 public class ApplicationController {
 
 
-  /** The calculator. */
   private static CompoundInterestCalculator calculator; // = new CompoundInterestCalculatorImpl();
 
   // public static void main(String[] args) {
@@ -34,21 +29,10 @@ public class ApplicationController {
 
 
 
-  /**
-   * Instantiates a new application controller.
-   *
-   * @param calculator the calculator
-   */
   public ApplicationController(CompoundInterestCalculator calculator) {
     this.calculator = calculator;
   }
 
-  /**
-   * Creates the table yield.
-   *
-   * @param initialInvestment the initial investment
-   * @return the list
-   */
   public List<InvestmentYieldDto> createTableYield(InitialInvestmentDto initialInvestment) {
 
     if (calculator.validateInput(initialInvestment)) {

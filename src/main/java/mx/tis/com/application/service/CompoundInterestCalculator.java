@@ -12,7 +12,6 @@
 package mx.tis.com.application.service;
 
 import java.util.ArrayList;
-import java.util.List;
 import mx.tis.com.dto.InitialInvestmentDto;
 import mx.tis.com.dto.InvestmentYieldDto;
 
