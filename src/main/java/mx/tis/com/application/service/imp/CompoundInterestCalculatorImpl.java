@@ -1,6 +1,7 @@
 package mx.tis.com.application.service.imp;
 
 import org.springframework.stereotype.Service;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import mx.tis.com.application.service.CompoundInterestCalculator;
 import mx.tis.com.dto.InitialInvestmentDto;
 import mx.tis.com.dto.InvestmentYieldDto;
@@ -36,6 +37,7 @@ return isValid;
   }
 
 
+  @HystrixCommand(commandKey = "createRevenueGrid", fallbackMethod = "fallbackRevenueGrid")
   public ArrayList<InvestmentYieldDto> createRevenueGrid(
       InitialInvestmentDto initialInvestmentDto) {
     Integer investmentYear = 0;
@@ -76,4 +78,7 @@ return isValid;
     return investmentYieldList;
   }
 
+  public ArrayList<InvestmentYieldDto> fallbackRevenueGrid(InitialInvestmentDto initialInvestmentDto) {
+    return null;
+  }
 }
